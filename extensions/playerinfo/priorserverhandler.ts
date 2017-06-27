@@ -41,12 +41,12 @@ class PriorServerHandler extends TerrariaServerPacketHandler {
                 const writer = new PacketWriter()
                     .setType(PacketTypes.DimensionsUpdate)
                     .packInt16(messageType)
-                    .packByte(1) // success: true
                     .packString(playerName)
+                    .packByte(1) // success: true
                     .packString(client.server.name)
                     .packSingle(client.player.position.x)
                     .packSingle(client.player.position.y)
-                    .packByte(client.player.inventory.length)
+                    .packByte(client.player.inventory.length);
                 
                 for (const item of client.player.inventory) {
                     writer
@@ -61,6 +61,7 @@ class PriorServerHandler extends TerrariaServerPacketHandler {
                 response = new PacketWriter()
                     .setType(PacketTypes.DimensionsUpdate)
                     .packInt16(messageType)
+                    .packString(playerName)
                     .packByte(0)
                     .data;
             }
